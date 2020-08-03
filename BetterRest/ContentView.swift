@@ -21,12 +21,34 @@ struct ContentView: View {
     @State private var coffeAmount = 1
     
     var body: some View {
-        VStack {
-            Text("When do you want to wake up?")
-                .font(.headline)
-            DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
-                .labelsHidden()
+        NavigationView {
+            VStack {
+                Text("When do you want to wake up?")
+                    .font(.headline)
+                DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
+                    .labelsHidden()
+                
+                Text("Desired amount of sleep")
+                    .font(.headline)
+                Stepper(value: $sleepAmount, in: 4...12, step: 0.25) {
+                    Text("\(sleepAmount, specifier: "%g") hours")
+                }
+                
+                Text("Daily coffe intake")
+                    .font(.headline)
+                Stepper(value: $coffeAmount, in: 1...20) {
+                    Text("\(coffeAmount) cups")
+                }
+            }
+            .navigationBarTitle("BetterRest")
+            .navigationBarItems(trailing: Button("Calculate") {
+                self.calculateBedtime()
+            })
         }
+    }
+    
+    func calculateBedtime() {
+        
     }
 }
 
