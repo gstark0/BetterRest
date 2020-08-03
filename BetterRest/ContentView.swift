@@ -8,9 +8,25 @@
 
 import SwiftUI
 
+let now = Date()
+let tomorrow = Date().addingTimeInterval(86400)
+let range = now ... tomorrow
+
+var comp = DateComponents()
+
 struct ContentView: View {
+    
+    @State private var wakeUp = Date()
+    @State private var sleepAmount = 8.0
+    @State private var coffeAmount = 1
+    
     var body: some View {
-        Text("Hello, World!")
+        VStack {
+            Text("When do you want to wake up?")
+                .font(.headline)
+            DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
+                .labelsHidden()
+        }
     }
 }
 
